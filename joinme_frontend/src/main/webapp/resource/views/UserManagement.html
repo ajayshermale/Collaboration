@@ -33,8 +33,9 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">User Registration Form </span></div>
               <div class="formcontainer">
-                  <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-                      <input type="hidden" ng-model="ctrl.user.id" />
+                  <form ng-submit="ctrl.submit()" name="userForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.user.user_id" />
+                      <br>
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="userName">Name</label>
@@ -91,14 +92,18 @@
 
  
  
- 
+ <div class="container">
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.user.user_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
-                              
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                             
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="userForm.$setPristine">Reset Form</button>
                           </div>
                       </div>
+                      </div>
+                    
+                      
+                      
                   </form>
               </div>
           </div>
@@ -120,16 +125,16 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.users">
-                              <td><span ng-bind="u.user_id"></span></td>
-                              <td><span ng-bind="u.userName"></span></td>
-                              <td><span ng-bind="u.password"></span></td>
-                              <td><span ng-bind="u.userFirstname"></span></td>
-                              <td><span ng-bind="u.lastFirstnamel"></span></td>
-                              <td><span ng-bind="u.createdBy"></span></td>
-                              <td><span ng-bind="u.createdDate"></span></td>
+                          <tr ng-repeat="row in ctrl.users">
+                              <td><span ng-bind="row.user_id"></span></td>
+                              <td><span ng-bind="row.userName"></span></td>
+                              <td><span ng-bind="row.password"></span></td>
+                              <td><span ng-bind="row.userFirstname"></span></td>
+                              <td><span ng-bind="row.lastFirstnamel"></span></td>
+                              <td><span ng-bind="row.createdBy"></span></td>
+                              <td><span ng-bind="row.createdDate"></span></td>
                               <td>
-                              <button type="button" ng-click="ctrl.edit(u.user_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.user_id)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.edit(row.user_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.user_id)" class="btn btn-danger custom-width">Remove</button>
                               </td>
                           </tr>
                       </tbody>
@@ -138,10 +143,10 @@
           </div>
       </div>
        
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-      <script src="<c:url value='/static/js/app.js' />"></script>
-      <script src="<c:url value='/static/js/service/user_service.js' />"></script>
-      <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+<!--       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script> -->
+<!--       <script src="<c:url value='/static/js/app.js' />"></script> -->
+<!--       <script src="<c:url value='/static/js/service/user_service.js' />"></script> -->
+<!--       <script src="<c:url value='/static/js/controller/user_controller.js' />"></script> -->
       </div>
   </body>
 </html>

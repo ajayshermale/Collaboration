@@ -21,7 +21,7 @@ app.factory('user_service', ['$http', '$q', function($http, $q){
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while fetching Users');
+                console.error('Error while fetching DSUsers');
                 deferred.reject(errResponse);
             }
         );
@@ -52,7 +52,7 @@ app.factory('user_service', ['$http', '$q', function($http, $q){
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while updating Blog');
+                console.error('Error while updating user');
                 deferred.reject(errResponse);
             }
         );

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.joinme.DAO.UserDAO;
-import com.niit.joinme.model.Blog;
 import com.niit.joinme.model.DSUser;
 @Repository
 public class UserDAOImpl implements UserDAO 
@@ -15,13 +14,14 @@ public class UserDAOImpl implements UserDAO
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	
+		
+    @SuppressWarnings("unchecked")
 	public List<DSUser> getAllUsers() {
 		List<DSUser> UserList = this.sessionFactory.getCurrentSession().createQuery("from DSUser").getResultList();
 		return UserList;
 	}
-
+    
+    @SuppressWarnings("unchecked")
 	public DSUser getById(int user_id) {
 		String sql = "from DSUser where user_id=" +user_id;
 		//we need to convert this sql to db specific query... sql is variable name can be any thing
@@ -34,7 +34,7 @@ public class UserDAOImpl implements UserDAO
 	}
 
 	public boolean saveUser(DSUser user) {
-		sessionFactory.getCurrentSession().save(user);
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 		return false;	
 		}
 
@@ -49,4 +49,13 @@ public class UserDAOImpl implements UserDAO
 		
 	}
 
+	 private static List<DSUser> UserList;
+	  public DSUser findByName(String userName) {
+	        for(DSUser user : UserList){
+	            if(user.getUsername().equalsIgnoreCase(userName)){
+	                return user;
+	            }
+	        }
+	        return null;
+	    }
 }

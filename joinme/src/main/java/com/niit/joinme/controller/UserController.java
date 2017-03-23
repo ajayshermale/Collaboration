@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.niit.joinme.model.Blog;
 import com.niit.joinme.model.DSUser;
 import com.niit.joinme.service.UserService;
 
@@ -32,10 +33,10 @@ public class UserController
 	
 	@RequestMapping(value= "/user", method = RequestMethod.GET)
 	public ResponseEntity<List<DSUser>> getAllUsers() {
-		List<DSUser> BlogList = userService.getAllUsers();
-		return new ResponseEntity<List<DSUser>>(BlogList, HttpStatus.OK);
+		List<DSUser> UserList = userService.getAllUsers();
+		return new ResponseEntity<List<DSUser>>(UserList, HttpStatus.OK);
 	}
-	
+		
 	@RequestMapping(value= "/user", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveUser(@RequestBody DSUser user, UriComponentsBuilder builder)
 	{
@@ -52,8 +53,7 @@ public class UserController
                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	
-	@RequestMapping(value="/user{user_id}", method = RequestMethod.PUT )
+	@RequestMapping(value="/user/{user_id}", method = RequestMethod.PUT )
 	public ResponseEntity<DSUser> updateUser(@RequestBody DSUser user) {
 		userService.updateUser(user);
 		return new ResponseEntity<DSUser>(user, HttpStatus.OK);

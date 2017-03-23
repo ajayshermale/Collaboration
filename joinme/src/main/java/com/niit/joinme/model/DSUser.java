@@ -3,11 +3,14 @@ package com.niit.joinme.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class DSUser {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int user_id;
 	private String userName;
 	private String password;

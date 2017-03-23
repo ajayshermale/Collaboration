@@ -25,8 +25,8 @@ app.controller('user_controller', ['$scope', 'user_service', function($scope, us
         );
     }
  
-    function createUser(user){
-    	user_service.createUser(user)
+    function createUser(users){
+    	user_service.createUser(users)
             .then(
             fetchAllUsers,
             function(errResponse){
@@ -60,8 +60,8 @@ app.controller('user_controller', ['$scope', 'user_service', function($scope, us
             console.log('Saving New User', self.user);
             createUser(self.user);
         }else{
-            updateUser(self.user, self.user.user_id);
-            console.log('User updated with user_id ', self.user.user_id);
+            updateUsers(self.user, self.user.user_id);
+            console.log('User updated with id ', self.user.user_id);
         }
         reset();
     }
@@ -89,5 +89,7 @@ app.controller('user_controller', ['$scope', 'user_service', function($scope, us
         self.user={user_id:null,userName:'',password:'',userFirstname:'',userLastname:'',createdBy:''};
         $scope.userForm.$setPristine(); //reset Form
     }
+    
+    
  
 }]);

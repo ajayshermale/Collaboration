@@ -4,7 +4,7 @@ var app=angular.module('app',['ngRoute']);
 app.config(function($routeProvider){
 	$routeProvider
      .when('/', {
-         templateUrl: 'home.html',
+    	 templateUrl: 'home.html',
         
      })
      
@@ -19,5 +19,5 @@ app.config(function($routeProvider){
          templateUrl: 'resource/views/UserManagement.html',
          controller: 'user_controller'
      }) 
-     
+    
 });

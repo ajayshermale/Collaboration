@@ -35,6 +35,23 @@ public class BlogController {
 		return new ResponseEntity<List<Blog>>(BlogList, HttpStatus.OK);
 	}
 	
+//	@RequestMapping(value= "/blog", method = RequestMethod.POST)
+//	public ResponseEntity<Void> saveBlog(@RequestBody Blog blog, UriComponentsBuilder builder)
+//	{
+//
+//		
+//		 Date date=new Date();
+//		 blog.setCreatedDate(date);
+//        boolean flag = blogService.saveBlog(blog);
+//               if (flag == false) {
+//        	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//               }
+//               HttpHeaders headers = new HttpHeaders();
+//               headers.setLocation(builder.path("/blog{blog_id}").buildAndExpand(blog.getBlog_id()).toUri());
+//               return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//	}
+//	
+	
 	@RequestMapping(value= "/blog", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveBlog(@RequestBody Blog blog, UriComponentsBuilder builder)
 	{
@@ -43,7 +60,7 @@ public class BlogController {
 		 Date date=new Date();
 		 blog.setCreatedDate(date);
         boolean flag = blogService.saveBlog(blog);
-               if (flag == false) {
+               if (flag == true) {
         	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                }
                HttpHeaders headers = new HttpHeaders();
@@ -52,7 +69,9 @@ public class BlogController {
 	}
 	
 	
-	@RequestMapping(value="/blog{blog_id}", method = RequestMethod.PUT )
+	
+	
+	@RequestMapping(value="/blog/{blog_id}", method = RequestMethod.PUT )
 	public ResponseEntity<Blog> updateBlog(@RequestBody Blog blog) {
 		blogService.updateBlog(blog);
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);

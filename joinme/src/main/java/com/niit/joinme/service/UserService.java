@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.joinme.DAOImpl.UserDAOImpl;
-import com.niit.joinme.model.Blog;
 import com.niit.joinme.model.DSUser;
 
 @Service
@@ -42,4 +41,7 @@ public class UserService
 		userDAOImpl.updateUser(user);
 	}
 	
+	 public DSUser findByName(String userName) {
+       return userDAOImpl.findByName(userName);
+    }
 }
