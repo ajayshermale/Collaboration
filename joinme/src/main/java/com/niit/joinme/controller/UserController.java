@@ -45,7 +45,7 @@ public class UserController
 		 Date date=new Date();
 		 user.setCreatedDate(date);
         boolean flag = userService.saveUser(user);
-               if (flag == false) {
+               if (flag == true) {
         	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                }
                HttpHeaders headers = new HttpHeaders();

@@ -36,6 +36,7 @@
                   <form ng-submit="ctrl.submit()" name="userForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.user.user_id" />
                       <br>
+                      <div class="container">
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="userName">Name</label>
@@ -55,7 +56,11 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="password">password</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.user.password" id="password" class="form-control input-sm" placeholder="Enter your password. [This field is validation free]"/>
+                                  <input type="text" ng-model="ctrl.user.password" id="password" class="password form-control input-sm" placeholder="Enter your password."/>
+                               <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.userFirstname.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.userFirstname.$invalid">This field is invalid </span>
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -64,10 +69,10 @@
                               <label class="col-md-2 control-lable" for="userFirstname">userFirstname</label>
                               <div class="col-md-7">
                                   <input type="userFirstname" ng-model="ctrl.user.userFirstname" id=userFirstname class="userFirstname form-control input-sm" placeholder="Enter your userFirstname" required/>
-<!--                                   <div class="has-error" ng-show="myForm.$dirty"> -->
-<!--                                       <span ng-show="myForm.userFirstname.$error.required">This is a required field</span> -->
-<!--                                       <span ng-show="myForm.userFirstname.$invalid">This field is invalid </span> -->
-<!--                                   </div> -->
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.userFirstname.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.userFirstname.$invalid">This field is invalid </span>
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -76,16 +81,22 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="userLastname">userLastname</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.user.userLastname" id="userLastname" class="form-control input-sm" placeholder="Enter your userLastname. [This field is validation free]"/>
+                                  <input type="text" ng-model="ctrl.user.userLastname" id="userLastname" class="form-control input-sm" placeholder="Enter your userLastname."/>
                               </div>
                           </div>
                       </div>
  
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="createdBy">mail</label>
+                              <label class="col-md-2 control-lable" for="createdBy">MailID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.user.createdBy" id="createdBy" class="form-control input-sm" placeholder="Enter your createdBy. [This field is validation free]"/>
+                                  <input type="text" ng-model="ctrl.user.createdBy" id="createdBy" class="form-control input-sm" placeholder="Enter your MailID."/>
+                               <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="blogForm.content.$error.required">This is a required field</span>
+                                      <span ng-show="blogForm.content.$error.minlength">Minimum length required is 5</span>
+                                      <span ng-show="blogForm.content.$invalid">This field is invalid </span>
+                                  </div>
+                              
                               </div>
                           </div>
                       </div>
@@ -99,9 +110,10 @@
                              
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="userForm.$setPristine">Reset Form</button>
                           </div>
+                          <br>
                       </div>
                       </div>
-                    
+                    </div>
                       
                       
                   </form>
@@ -111,6 +123,7 @@
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Users </span></div>
               <div class="tablecontainer">
+              <div class="container">
                   <table class="table table-hover">
                       <thead>
                           <tr>
@@ -121,6 +134,7 @@
                                <th>lastFirstname</th>
                                 <th>createdBy</th>
                                  <th>createdDate</th>
+                                 <th>Action</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
@@ -139,6 +153,7 @@
                           </tr>
                       </tbody>
                   </table>
+              </div>
               </div>
           </div>
       </div>

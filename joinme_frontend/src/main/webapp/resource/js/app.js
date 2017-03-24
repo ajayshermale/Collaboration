@@ -20,4 +20,9 @@ app.config(function($routeProvider){
          controller: 'user_controller'
      }) 
     
+      .when('/forum', {
+         
+         templateUrl: 'resource/views/ForumManagement.html',
+         controller: 'forum_controller'
+     })
 });

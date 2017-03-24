@@ -28,24 +28,24 @@
      <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
   </head>
   <div class="container">
-  <body ng-app="myApp" class="ng-cloak">
-      <div class="generic-container" ng-controller="blog_controller as ctrl">
+  <body ng-app="app" class="ng-cloak">
+      <div class="generic-container" ng-controller="forum_controller as ctrl">
           <div class="panel panel-default">
-              <div class="panel-heading"><span class="lead">Blog Creation Form </span></div>
+              <div class="panel-heading"><span class="lead">Forum Creation Form </span></div>
               <div class="formcontainer">
-                  <form ng-submit="ctrl.submit()" name="blogForm" class="form-horizontal">
-                      <input type="hidden" ng-model="ctrl.blog.blog_id" />
+                  <form ng-submit="ctrl.submit()" name="forumForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.forum.forum_id" />
                       <br>
                       <div class="container">
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="title">Title</label>
+                              <label class="col-md-2 control-lable" for="forumName">ForumName</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.blog.title" id="title" class="title form-control input-sm" placeholder="Enter Title" required ng-minlength="3"/>
+                                  <input type="text" ng-model="ctrl.forum.forumName" id="title" class="title form-control input-sm" placeholder="Enter Title" required ng-minlength="3"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="blogForm.title.$error.required">This is a required field</span>
-                                      <span ng-show="blogForm.title.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="blogForm.title.$invalid">This field is invalid </span>
+                                      <span ng-show="forumForm.title.$error.required">This is a required field</span>
+                                      <span ng-show="forumForm.title.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="forumForm.title.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
@@ -54,13 +54,13 @@
                        
                         <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="content">Content</label>
+                              <label class="col-md-2 control-lable" for="forumContent">Content</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.blog.content" id="content" class="content form-control input-sm" placeholder="Enter content" required ng-minlength="3"/>
+                                  <input type="text" ng-model="ctrl.forum.forumContent" id="content" class="content form-control input-sm" placeholder="Enter content" required ng-minlength="3"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="blogForm.content.$error.required">This is a required field</span>
-                                      <span ng-show="blogForm.content.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="blogForm.content.$invalid">This field is invalid </span>
+                                      <span ng-show="forumForm.content.$error.required">This is a required field</span>
+                                      <span ng-show="forumForm.content.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="forumForm.content.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
@@ -91,8 +91,8 @@
        <div class="container">
                       <div class="row">
                           <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.blog.blog_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="blogForm.$invalid">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset Form</button>
+                              <input type="submit"  value="{{!ctrl.forum.forum_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="forumForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="forumForm.$pristine">Reset Form</button>
                           </div>
                       </div>
                       </div>
@@ -103,28 +103,28 @@
           </div>
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Blogs </span></div>
+              <div class="panel-heading"><span class="lead">List of Forums </span></div>
               <div class="tablecontainer">
                  <div class="container">
                   <table class="table table-hover">
                       <thead>
                           <tr>
                               <th>ID.</th>
-                              <th>Blog Title</th>
-                              <th>Blog Content</th>
+                              <th>Forum Title</th>
+                              <th>Forum Content</th>
                               <th>Action</th>
 <!--                               <th>Email</th> -->
 <!--                               <th width="20%"></th> -->
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="row in ctrl.blogs">
-                              <td><span ng-bind="row.blog_id"></span></td>
-                              <td><span ng-bind="row.title"></span></td>
-                              <td><span ng-bind="row.content"></span></td>
+                          <tr ng-repeat="row in ctrl.forums">
+                              <td><span ng-bind="row.forum_id"></span></td>
+                              <td><span ng-bind="row.forumName"></span></td>
+                              <td><span ng-bind="row.forumContent"></span></td>
 <!--                               <td><span ng-bind="u.email"></span></td> -->
                               <td>
-                              <button type="button" ng-click="ctrl.edit(row.blog_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.blog_id)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.edit(row.forum_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.forum_id)" class="btn btn-danger custom-width">Remove</button>
                               </td>
                           </tr>
                       </tbody>
@@ -136,7 +136,7 @@
        </div>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
       <script src="<c:url value='/static/js/app.js' />"></script>
-      <script src="<c:url value='/static/js/service/user_service.js' />"></script>
-      <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+      <script src="<c:url value='/static/js/service/forum_service.js' />"></script>
+      <script src="<c:url value='/static/js/controller/forum_controller.js' />"></script>
   </body>
 </html>
