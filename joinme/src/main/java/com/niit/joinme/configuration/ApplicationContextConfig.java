@@ -9,13 +9,17 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
+
 @Configuration
+@ComponentScan(basePackages="com.niit.joinme")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 
@@ -24,11 +28,11 @@ public class ApplicationContextConfig {
 	    BasicDataSource dataSource = new BasicDataSource();
 	    dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 	    dataSource.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:XE");
-	    dataSource.setUsername("joinme");
+	    dataSource.setUsername("joindatabase");
 	    dataSource.setPassword("sys");
 	    Properties properties = new Properties();
 	    properties.setProperty("hibernate.hbm2ddl.auto", "update");
-	    properties.setProperty("hibernate.default_schema", "JOINME");
+	    properties.setProperty("hibernate.default_schema", "JOINDATABASE");
 	    properties.setProperty("hibernate.show_sql", "true");
 	    properties.setProperty("hibernate.format_sql", "true");
 	    properties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
@@ -49,7 +53,7 @@ public class ApplicationContextConfig {
 	private Properties getHibernateProperties() {
 	    Properties properties = new Properties();
 	    properties.put("hibernate.hbm2ddl.auto", "update");
-	    properties.put("hibernate.default_schema", "JOINME");
+	    properties.put("hibernate.default_schema", "JOINDATABASE");
 	    properties.put("hibernate.show_sql", "true");
 	    properties.put("hibernate.format_sql", "true");
 	    properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");

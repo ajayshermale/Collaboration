@@ -1,13 +1,13 @@
 'use strict';
  
-app.controller('blog_controller', ['$scope', 'blog_service', function($scope, blog_service) {
+app.controller('blog_controller', ['$scope', 'blog_service','$http','$location', function($scope, blog_service,$http,$location) {
     var self = this;
     self.blog={blog_id:null,title:'',content:''};
     self.blogs=[];
- 
     self.submit = submit;
     self.edit = edit;
     self.remove = remove;
+    self.view = view;
     self.reset = reset;
  
  
@@ -76,6 +76,21 @@ app.controller('blog_controller', ['$scope', 'blog_service', function($scope, bl
         }
     }
  
+  
+    
+    function view(blog_id){
+    	$http.get('http://localhost:8081/joinme/blog/'+blog_id).then
+    	console.log('blog to view ', blog_id);
+         for(var i = 0; i < self.blogs.length; i++){
+             if(self.blogs[i].blog_id === blog_id) {
+                 self.blogview = angular.copy(self.blogs[i]);
+                 break;
+                 
+             }
+         }
+
+    }
+  
     function remove(blog_id){
         console.log('id to be deleted', blog_id);
         if(self.blog.blog_id === blog_id) {//clean form if the user to be deleted is shown there.

@@ -125,6 +125,9 @@
 <!--                               <td><span ng-bind="u.email"></span></td> -->
                               <td>
                               <button type="button" ng-click="ctrl.edit(row.blog_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.blog_id)" class="btn btn-danger custom-width">Remove</button>
+<!--                               <button type="button" ng-click="ctrl.view(row.blog_id)" class="btn btn-success custom-width">view</button> -->
+                              	<button type="button" ng-click="ctrl.view(row.blog_id)" class="btn btn-success custom-width" data-toggle="modal" data-target="blogModal">View Blog</button>
+                              <div ng-include="'resource/views/viewblog.html'"></div>
                               </td>
                           </tr>
                       </tbody>

@@ -8,7 +8,8 @@ app.factory('blog_service', ['$http', '$q', function($http, $q){
         fetchAllBlogs: fetchAllBlogs,
         createBlog: createBlog,
         updateBlog:updateBlog,
-        deleteBlog:deleteBlog
+        deleteBlog:deleteBlog,
+      
     };
  
     return factory;
@@ -74,4 +75,6 @@ app.factory('blog_service', ['$http', '$q', function($http, $q){
         return deferred.promise;
     }
  
+
+    
 }]);

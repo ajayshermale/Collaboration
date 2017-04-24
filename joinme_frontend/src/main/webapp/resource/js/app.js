@@ -25,4 +25,11 @@ app.config(function($routeProvider){
          templateUrl: 'resource/views/ForumManagement.html',
          controller: 'forum_controller'
      })
+     
+      .when('/event', {
+         
+         templateUrl: 'resource/views/EventManagement.html',
+         controller: 'event_controller'
+     })
+     
 });
