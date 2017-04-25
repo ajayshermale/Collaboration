@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.niit.joinme.model.Blog;
+
 import com.niit.joinme.model.DSUser;
 import com.niit.joinme.service.UserService;
 
@@ -24,7 +24,8 @@ public class UserController
 	
 	@Autowired
 	private UserService userService;
-	
+	//http://localhost:8080/joinme/user/user_id
+	//@get mapping("/user/{user_id}")
 	@RequestMapping(value="/user/{user_id}", method = RequestMethod.GET )
 	public ResponseEntity<DSUser> getById(@PathVariable("user_id") Integer user_id) {
 		DSUser user = userService.getById(user_id);

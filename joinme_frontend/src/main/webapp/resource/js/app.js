@@ -1,5 +1,8 @@
 'use strict';
-var app=angular.module('app',['ngRoute']);
+var app=angular.module('app',['ngRoute','ngSanitize']);
+
+
+
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -8,12 +11,19 @@ app.config(function($routeProvider){
         
      })
      
+    
      .when('/blog', {
-      
-         templateUrl: 'resource/views/BlogManagement.html',
-         controller: 'blog_controller'
-     }) 
+    	controller: 'blog_controller',
+    	  controller: 'blog_comment_controller',
+    	  controller: 'blog_like_controller',
+        templateUrl: 'resource/views/BlogManagement.html',
+        
+     })
+
+
      
+   
+
      .when('/user', {
          
          templateUrl: 'resource/views/UserManagement.html',
@@ -25,11 +35,21 @@ app.config(function($routeProvider){
          templateUrl: 'resource/views/ForumManagement.html',
          controller: 'forum_controller'
      })
-     
-      .when('/event', {
-         
-         templateUrl: 'resource/views/EventManagement.html',
-         controller: 'event_controller'
-     })
-     
 });
+
+
+app.directive('fileModel', ['$parse', function ($parse) {
+ return {
+ restrict: 'A',
+ link: function(scope, element, attrs) {
+ var model = $parse(attrs.fileModel);
+ var modelSetter = model.assign;
+
+element.bind('change', function(){
+ scope.$apply(function(){
+ modelSetter(scope, element[0].files[0]);
+ });
+ });
+ }
+ };
+ }]);

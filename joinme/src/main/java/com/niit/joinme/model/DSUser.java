@@ -1,11 +1,14 @@
 package com.niit.joinme.model;
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class DSUser {
@@ -19,6 +22,15 @@ public class DSUser {
 	private String userRole;
 	private String createdBy;
 	private Date createdDate;
+	@Transient
+	private MultipartFile userImage;
+	
+	public MultipartFile getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(MultipartFile userImage) {
+		this.userImage = userImage;
+	}
 	public int getUserId() {
 		return user_id;
 	}

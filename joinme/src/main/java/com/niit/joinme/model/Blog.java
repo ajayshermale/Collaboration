@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Blog {
@@ -20,6 +23,18 @@ public class Blog {
 	private String content;
 	
 	private Date createdDate;
+	
+	@Transient
+	private MultipartFile blogImage;
+	
+
+	public MultipartFile getBlogImage() {
+		return blogImage;
+	}
+
+	public void setBlogImage(MultipartFile blogImage) {
+		this.blogImage = blogImage;
+	}
 
 	public int getBlog_id() {
 		return blog_id;

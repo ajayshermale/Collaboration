@@ -1,8 +1,8 @@
 'use strict';
  
-app.factory('BlogCommentService', ['$http', '$q', function($http, $q){
+app.factory('blog_comment_service', ['$http', '$q', function($http, $q){
  
-    var REST_SERVICE_URI = 'http://localhost:8081/joinme/blogComment/';
+    var REST_SERVICE_URI = 'http://localhost:8083/joinme/blogComment/';
  
     var factory = {
         fetchAllBlogComments: fetchAllBlogComments,
@@ -19,11 +19,8 @@ app.factory('BlogCommentService', ['$http', '$q', function($http, $q){
             .then(
             function (response) {
                 deferred.resolve(response.data);
-            },
-            function(errResponse){
-                console.error('Error while fetching Users');
-                deferred.reject(errResponse);
             }
+           
         );
         return deferred.promise;
     }
@@ -34,11 +31,8 @@ app.factory('BlogCommentService', ['$http', '$q', function($http, $q){
             .then(
             function (response) {
                 deferred.resolve(response.data);
-            },
-            function(errResponse){
-                console.error('Error while creating Comment');
-                deferred.reject(errResponse);
             }
+         
         );
         return deferred.promise;
     }

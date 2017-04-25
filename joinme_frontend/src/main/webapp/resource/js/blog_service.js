@@ -2,14 +2,14 @@
  
 app.factory('blog_service', ['$http', '$q', function($http, $q){
  
-    var REST_SERVICE_URI = 'http://localhost:8081/joinme/blog/';
+    var REST_SERVICE_URI = 'http://localhost:8083/joinme/blog/';
  
     var factory = {
         fetchAllBlogs: fetchAllBlogs,
         createBlog: createBlog,
         updateBlog:updateBlog,
         deleteBlog:deleteBlog,
-      
+//        uploadFileToUrl:uploadFileToUrl,
     };
  
     return factory;
@@ -31,6 +31,7 @@ app.factory('blog_service', ['$http', '$q', function($http, $q){
  
     function createBlog(blog) {
         var deferred = $q.defer();
+       
         $http.post(REST_SERVICE_URI, blog)
             .then(
             function (response) {
@@ -44,6 +45,37 @@ app.factory('blog_service', ['$http', '$q', function($http, $q){
         return deferred.promise;
     }
  
+    
+//    function uploadFileToUrl(file, uploadUrl){
+//    	 var fd = new FormData();
+//    	 fd.append('file', file);
+//    	 return $http.post(uploadUrl, fd, {
+//    	 transformRequest: angular.identity,
+//    	 headers: { 'Content-Type' : undefined}
+//    	 })
+//    	 .success(function(response){
+//
+//    	/* $scope.errors = response.data.value; */
+//    	 console.log(response);
+//    	 responseData = response;
+//    	 deffered.resolve(response);
+//    	 return deffered.promise;
+//    	 })
+//    	 .error(function(error){
+//    	 deffered.reject(error);
+//    	 return deffered.promise;
+//    	 });
+//
+//    	}
+//
+//    	this.getResponse = function() {
+//    	 return responseData;
+//    	 }
+
+    
+    
+    
+    
  
     function updateBlog(blog, blog_id) {
         var deferred = $q.defer();

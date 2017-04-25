@@ -1,7 +1,6 @@
 package com.niit.joinme.DAO;
 
 import java.util.List;
-
 import com.niit.joinme.model.Blog;
 
 public interface BlogDAO {	
@@ -17,6 +16,7 @@ public interface BlogDAO {
 		public void deleteBlog(int blog_id);
 		
 		public Blog getView(int blog_id);
-		    
+		   
+
 		} 
 

@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('BlogCommentController', ['$scope', 'BlogCommentService', 'textAngularManager','$location',function($scope, BlogCommentService,textAngularManager,$location) {
+app.controller('blog_comment_controller', ['$scope', 'blog_comment_service','$location',function($scope, blog_comment_service,$location) {
   
 	var self = this;
     self.blogComment={commentId:null,blogComment:''};
@@ -17,7 +17,7 @@ app.controller('BlogCommentController', ['$scope', 'BlogCommentService', 'textAn
    
  
      self.fetchAllBlogComments = function(){
-        BlogCommentService.fetchAllBlogComments()
+    	 blog_comment_service.fetchAllBlogComments()
             .then(
             function(d) {
                 self.blogComments = d;
@@ -31,7 +31,7 @@ app.controller('BlogCommentController', ['$scope', 'BlogCommentService', 'textAn
  
     
     function createBlogComment(blogComment){
-        BlogCommentService.createBlogComment(blogComment)
+    	blog_comment_service.createBlogComment(blogComment)
             .then(
             self.fetchAllBlogComments,
             function(errResponse){
@@ -41,7 +41,7 @@ app.controller('BlogCommentController', ['$scope', 'BlogCommentService', 'textAn
     }
  
     function deleteBlogComment(commentId){
-        BlogCommentService.deleteBlogComment(commentId)
+    	blog_comment_service.deleteBlogComment(commentId)
             .then(
             self.fetchAllBlogComments,
             function(errResponse){

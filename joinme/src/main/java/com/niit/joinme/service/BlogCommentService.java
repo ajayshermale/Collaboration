@@ -1,5 +1,4 @@
 package com.niit.joinme.service;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.joinme.DAOImpl.BlogCommentDAOImpl;
 import com.niit.joinme.model.BlogComment;
 
+
 @Service
 @Transactional
 public class BlogCommentService {
 	@Autowired
 	private BlogCommentDAOImpl blogCommentDAOImpl;
 	
-	public boolean addBlog(BlogComment blogComment){
-		blogCommentDAOImpl.addBlog(blogComment);
+	public boolean  saveBlogComment(BlogComment blogComment){
+		blogCommentDAOImpl. saveBlogComment(blogComment);
 		return true;
 		
 	}
@@ -30,3 +30,5 @@ public class BlogCommentService {
 	}
 
 }
+
+

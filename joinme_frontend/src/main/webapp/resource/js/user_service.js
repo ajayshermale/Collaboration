@@ -2,7 +2,7 @@
  
 app.factory('user_service', ['$http', '$q', function($http, $q){
  
-    var REST_SERVICE_URI = 'http://localhost:8081/joinme/user/';
+    var REST_SERVICE_URI = 'http://localhost:8083/joinme/user/';
  
     var factory = {
         fetchAllUsers: fetchAllUsers,

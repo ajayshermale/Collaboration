@@ -2,7 +2,7 @@
  
 app.factory('forum_service', ['$http', '$q', function($http, $q){
  
-    var REST_SERVICE_URI = 'http://localhost:8081/joinme/forum/';
+    var REST_SERVICE_URI = 'http://localhost:8083/joinme/forum/';
  
     var factory = {
         fetchAllForums: fetchAllForums,

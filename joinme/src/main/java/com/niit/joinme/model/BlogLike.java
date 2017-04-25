@@ -1,5 +1,6 @@
 package com.niit.joinme.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,22 +15,13 @@ public class BlogLike {
 	private int user_id;
 	private int blog_id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="user_id",nullable=false, updatable=false, insertable=false)
-	private DSUser dsUser;
+	private DSUser user;
 	
-	@ManyToOne
-	@JoinColumn(name="blog_id",nullable=false, updatable=false, insertable=false)
-	private Blog blog;
-	
-
-	public Blog getBlog() {
-		return blog;
-	}
-
-	public void setBlog(Blog blog) {
-		this.blog = blog;
-	}
+	@ManyToOne(cascade=CascadeType.REMOVE)
+	@JoinColumn(name="blog_id",nullable=false,insertable=false,updatable=false)
+    private Blog blog;
 
 	public int getBlogLikeId() {
 		return blogLikeId;
@@ -55,12 +47,21 @@ public class BlogLike {
 		this.blog_id = blog_id;
 	}
 
-	public DSUser getDsUser() {
-		return dsUser;
+	public DSUser getUser() {
+		return user;
 	}
 
-	public void setDsUser(DSUser dsUser) {
-		this.dsUser = dsUser;
+	public void setUser(DSUser user) {
+		this.user = user;
 	}
+
+	public Blog getBlog() {
+		return blog;
+	}
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
+	
 	
 }
