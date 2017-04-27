@@ -52,31 +52,34 @@ public class BlogController {
 
 	@RequestMapping(value= "/blog", method = RequestMethod.POST)
 	
-	public ResponseEntity<Void> saveBlog(@RequestBody Blog blog,@RequestParam(value="file")MultipartFile file, UriComponentsBuilder builder)
+	public ResponseEntity<Void> saveBlog(@RequestBody Blog blog,Integer blog_id,UriComponentsBuilder builder,HttpSession session)
 	{
-	
+		
 		 Date date=new Date();
 		 blog.setCreatedDate(date);
         boolean flag = blogService.saveBlog(blog);
-        
+       
                if (flag == true) {
         	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                }
+            
                HttpHeaders headers = new HttpHeaders();
                headers.setLocation(builder.path("/blog{blog_id}").buildAndExpand(blog.getBlog_id()).toUri());
+               session.setAttribute("blog_id",blog.getBlog_id());
+        		 System.out.println("blog id to set "+blog.getBlog_id());
                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
               
 	}
 	
 	//blog image upload
-		@RequestMapping(value= "/blog/blogImage", method = RequestMethod.POST)
+		@RequestMapping(value= "/blog/blogImage",headers=("content-type=multipart/*"),method = RequestMethod.POST)
 		public ResponseEntity<Void> addblogImage(@RequestParam(value="file")MultipartFile file,HttpSession session,UriComponentsBuilder builder,Blog blog){
-		//int	blog_id=(Integer) session.getAttribute("blogId");
-
-		      
+		
+			    
       String path="C:\\Users\\Rahul\\workspace project2 new\\joinme_frontend\\src\\main\\webapp\\resource\\images\\";
-		path=path+String.valueOf(blog.getBlog_id())+".jpg";
-		System.out.println("blog idd is"+blog.getBlog_id());
+      int	blog_id=(Integer) session.getAttribute("blog_id");
+		path=path+blog_id+".jpg";
+		System.out.println("blog idd is"+blog_id);
 		File f=new File(path);
 		System.out.println("path is"+path);
 		

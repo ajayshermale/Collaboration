@@ -1,0 +1,114 @@
+/*Contact sectiom */
+.content-header{
+  font-family: 'Oleo Script', cursive;
+  color:#fcc500;
+  font-size: 45px;
+}
+
+.section-content{
+  text-align: center; 
+
+}
+#contact{
+    
+    font-family: 'Teko', sans-serif;
+  padding-top: 60px;
+  width: 100%;
+  width: 100vw;
+  height: 550px;
+  background: #3a6186; fallback for old browsers
+  background: -webkit-linear-gradient(to left, #3a6186 , #89253e); Chrome 10-25, Safari 5.1-6
+  background: linear-gradient(to left, #3a6186 , #89253e); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
+    color : #fff;    
+}
+.contact-section{
+  padding-top: 40px;
+}
+
+.contact-section .col-md-6{
+  width: 50%;
+}
+
+.form-line{
+  border-right: 1px solid #B29999;
+}
+
+.form-group{
+  margin-top: 10px;
+}
+label{
+  font-size: 1.3em;
+  line-height: 1em;
+  font-weight: normal;
+}
+.form-control{
+  font-size: 1.3em;
+  color: #080808;
+}
+
+
+
+
+
+.TemplateFrontpage-content {
+    background-color: #fff;
+    overflow: hidden;
+}
+.Container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.Section-title {
+    font-family: Open Sans,sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 38px;
+    text-align: center;
+    margin: 50px 0 25px;
+}
+
+.Grid {
+    display: block;
+}
+.Grid>.Grid-cell {
+    flex: 1;
+    padding: 10px;
+}
+.Card {
+    margin-bottom: 20px;
+}
+
+.col-mm-3 {
+    display: block;
+    margin: 0 auto;
+    max-width: 80%;
+   
+    
+}
+
+.Card-content {
+    text-align: center;
+}
+.CmsContent {
+    font-size: 18px;
+    line-height: 28px;
+}
+.Footer:after {
+    content: url(https://d32wid4gq0d4kh.cloudfront.net/95b184586d1193a37bf94d10ae8a04ee.svg);
+    display: block;
+    width: 100%;
+}
+.Footer-container {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.Grid--fill {
+    justify-content: space-between;
+}
+@media (min-width: 768px)
+.Grid {
+    display: flex;
+}

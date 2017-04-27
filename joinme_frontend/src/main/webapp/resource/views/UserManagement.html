@@ -28,7 +28,7 @@
      <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
   </head>
   <body ng-app="app" class="ng-cloak">
-  <div class="container">
+<!--   <div class="container"> -->
       <div class="generic-container" ng-controller="user_controller as ctrl">
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">User Registration Form </span></div>
@@ -36,7 +36,7 @@
                   <form ng-submit="ctrl.submit()" name="userForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.user.user_id" />
                       <br>
-                      <div class="container">
+<!--                       <div class="container"> -->
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="userName">Name</label>
@@ -103,7 +103,7 @@
 
  
  
- <div class="container">
+<!--  <div class="container"> -->
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.user.user_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
@@ -113,17 +113,17 @@
                           <br>
                       </div>
                       </div>
-                    </div>
+                
                       
                       
                   </form>
               </div>
-          </div>
+<!--           </div> -->
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Users </span></div>
               <div class="tablecontainer">
-              <div class="container">
+<!--               <div class="container"> -->
                   <table class="table table-hover">
                       <thead>
                           <tr>
@@ -131,7 +131,7 @@
                               <th>Name</th>
                               <th>password</th>
                               <th>userFirstname</th>
-                               <th>lastFirstname</th>
+                               <th>userLastnamee</th>
                                 <th>createdBy</th>
                                  <th>createdDate</th>
                                  <th>Action</th>
@@ -144,7 +144,7 @@
                               <td><span ng-bind="row.userName"></span></td>
                               <td><span ng-bind="row.password"></span></td>
                               <td><span ng-bind="row.userFirstname"></span></td>
-                              <td><span ng-bind="row.lastFirstnamel"></span></td>
+                              <td><span ng-bind="row.userLastname"></span></td>
                               <td><span ng-bind="row.createdBy"></span></td>
                               <td><span ng-bind="row.createdDate"></span></td>
                               <td>

@@ -1,5 +1,5 @@
 'use strict';
-var app=angular.module('app',['ngRoute','ngSanitize']);
+var app=angular.module('app',['ngRoute','ngSanitize','textAngular']);
 
 
 
