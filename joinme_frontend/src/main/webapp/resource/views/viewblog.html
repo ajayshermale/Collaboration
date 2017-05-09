@@ -10,35 +10,63 @@
       </div>
       <div class="modal-body" >
         <p>{{ctrl.blogview.blog_id}}</p>
-         <td><img  src="resource/images/{{ctrl.blogview.blog_id}}.jpg" style="width:304px;height:228px;"> 
-        
+         <td><img  src="resource/blogimg/{{ctrl.blogview.blog_id}}.jpg" style="width:304px;height:228px;"> 
+         
+          <form name="blogForm" ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST">
+		<input type="file" file-model="blogImage"/>
+		<button type="submit" class="btn btn-lg btn-primary"ng-disabled="blogForm.$invalid">Save</button>
+         
+         
+         
+  
       <td>  <p>Blog Name:<h3>{{ctrl.blogview.title}}</h3></p></td>
        <td> <p><span ng-bind-html="ctrl.blogview.content"></p></td>
       </div>
       
       
-                            <div class="metadata-border">
-<!--                                         <span><i class="fa fa-eye"></i> 26</span> -->
-<!--                                         <a href="#"><i class="fa fa-comment"></i> 350</a> -->
-                       <div ng-controller="blog_like_controller as bloglikectrl">
+               <div class="metadata-border">
+
+                   <div ng-controller="blog_like_controller as bloglikectrl">
                                  <form ng-submit="bloglikectrl.submit()" name="blogLikeForm" class="form-horizontal">
       	                        	<input type="hidden" ng-model="bloglikectrl.blogLike.blogLikeId" />             
-                                      	<i ng-click="bloglikectrl.submit()" class="fa fa-heart" aria-hidden="true"></i>   
-<!--                                  <a class="list-group-item" href="#">       <span><i class="fa fa-heart"></i> 50</span> -->
+                                      <a class="btn btn-info btn-lg"><i ng-click="bloglikectrl.submit()" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"> Like</i></a> 
 
-                                        </form></div>
-                                        
-                                       
-<!--                                         <span class="kopa-rate"> -->
-<!--                                         <i class="fa fa-star"></i> -->
-<!--                                         <i class="fa fa-star"></i> -->
-<!--                                         <i class="fa fa-star"></i> -->
-<!--                                         <i class="fa fa-star"></i> -->
-<!--                                         <i class="fa fa-star-o"></i> -->
-                                        </span>
-                                    </div>
+                               </form>
+                           
+       <button type="button" ng-click="bloglikectrl.fetchAllBlogLikes()" class="btn btn-warning btn-sm" style="float:right;">view blogLikes</button>
+      <div class="tablecontainer">
+                  <table class="table table-hover">
+                     
+                      <tbody>
+                          <tr ng-repeat="row in bloglikectrl.blogLikes">
+                          <th>Liked by</th>
+                              <td>
+                              <span ng-bind="row.user.userName"></span>
+                            
+                              </td>
+                              <td>
+                              <button type="button" ng-click="bloglikectrl.remove(row.blogLikeId)" class="btn btn-danger custom-width">UnLike</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>    
+                               
+                               
+                     </div>   
+                </div>
+                         
+<!-- <div class="dropdown" style="float:right;" ng-repeat="row in ctrl.blogLikes"> -->
+<!--   <button class="btn btn-info btn-lg" >Right</button> -->
+<!--   <div class="dropdown-content" > -->
+<!--     <a href="#">{{ctrl.blogLikes.userName}}</a> -->
+<!--     <a href="#">Link 2</a> -->
+<!--     <a href="#">Link 3</a> -->
+<!--   </div> -->
+<!-- </div>          -->
+
       
-      
+      <hr>
       
       <div ng-controller="blog_comment_controller as ctrl">
       <form ng-submit="ctrl.submit()" name="blogCommentForm" class="form-horizontal">
@@ -46,30 +74,37 @@
       		<div class="row">
                           <div class="form-group col-md-12">
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.blogComment.blogComment" id="bname" class="username form-control input-sm" placeholder="Post comment" />
+                                  <textarea type="text" ng-model="ctrl.blogComment.blogComment" id="bname" class="username form-control input-sm" placeholder="Post comment" />
                               </div>
+                              	<button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
                           </div>
                       </div>
-             <div class="row">
-                          <div class="form-actions floatRight">
-                              <input type="submit"  value="post" class="btn btn-primary btn-sm">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset</button>
-                          </div>
-                      </div>
+<!--              <div class="row"> -->
+<!--                           <div class="form-actions floatRight"> -->
+<!--                               <input type="submit"  value="post"  class="fa fa-share"> -->
+<!--                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset</button> -->
+<!--                           </div> -->
+<!--                       </div> -->
       </form>
+      
+      
       <button type="button" ng-click="ctrl.fetchAllBlogComments()" class="btn btn-warning btn-sm" >view comments</button>
       <div class="tablecontainer">
                   <table class="table table-hover">
-                      <thead>
+                     	<thead>
                           <tr>
-                              <th>Comments</th>
-                             <th>   </th>
+                              <th>Comment by</th>
+                             <th>Comment </th>
+                             <th>Comment Date</th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr ng-repeat="row in ctrl.blogComments">
-                              <td><span ng-bind="row.blogComment"></span>
-                              <span ng-bind="row.commentDate"></span>
+                           
+                              <td>
+                              <span ng-bind="row.user.userName"></span></td>
+                             <td> <span ng-bind="row.blogComment"></span></td>
+                              <td><span ng-bind="row.commentDate"></span>
                               </td>
                               <td>
                               <button type="button" ng-click="ctrl.remove(row.commentId)" class="btn btn-danger custom-width">Delete</button>
@@ -81,7 +116,8 @@
       
 
       <div class="modal-footer">
-        <button type="button" ng-click="ctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+<!--       ng-click="ctrl.refresh()" -->
+        <button type="button"  class="btn btn-default" data-dismiss="modal" href="http://localhost:8081/joinme_frontend/#/blog">Close</button>
       </div>
     </div>
 	      </div>

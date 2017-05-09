@@ -1,0 +1,104 @@
+<html>
+  <head>  
+    <title>AngularJS $http Example</title>  
+    <style>
+  
+ 
+    </style>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+  </head>
+  <body  ng-app="app" class="ng-cloak">
+<!--   <div class="container"> -->
+      <div class="generic-container" ng-controller="blog_controller as ctrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Blog Creation Form </span></div>
+              <div class="formcontainer">
+                  <form ng-submit="ctrl.submit()" name="blogForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.blog.blog_id" />
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="title">Title</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.blog.title" id="title" class="title form-control input-sm" placeholder="Enter blog title" required ng-minlength="3"/>
+                                  <div class="has-error" ng-show="blogForm.$dirty">
+                                      <span ng-show="blogForm.bname.$error.required">This is a required field</span>
+                                      <span ng-show="blogForm.bname.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="blogForm.bname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      
+     <div class="form-group col-md-12">
+									<label class="col-md-2 control-lable" for="content">Content</label>
+									<div class="col-md-7">
+   
+     <div text-angular="text-angular" name="htmlcontent" ng-model="ctrl.blog.content" id="content"  ta-disabled='disabled' 
+        ta-toolbar="[['bold','underline','italics','undo','redo', 'quote','p','pre','ul','ol', 'insertImage','insertLink','unlink']]"></div>
+                  		</div>
+									</div>
+								      
+                    </div>
+                      
+
+ 		
+ 	
+<form name="blogForm" ng-submit="ctrl.submit()" enctype="multipart/form-data" method="POST">
+<input type="file" file-model="myFile"/>
+<!-- <button type="submit" class="btn btn-lg btn-primary">Save</button> -->
+ 		
+ 			
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                          
+                              <input type="submit"  value="{{!ctrl.blog.blog_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="blogForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset Form</button>
+                          </div>
+                      </div></div>
+                  </form>
+              </div>
+          
+          <div class="panel panel-default">
+               
+              <div class="panel-heading"><span class="lead">List of Blogs </span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>Blog Name</th>
+                              <th>Blog Content</th>
+                              <th>Blog Image</th>
+                               <th>Blog Action</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in ctrl.blogs">
+                             <td><span ng-bind="row.blog_id"></span></td>
+									<td><span ng-bind="row.title"></span></td>
+									<td><span ng-bind-html="row.content"></span></td></td>
+									
+
+                            <td><img  src="resource/images/{{row.blog_id}}.jpg" style="width:304px;height:228px;"> 
+                       
+                        
+									</td>
+                              <td>
+                              
+                              <button type="button" ng-click="ctrl.edit(row.blog_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.blog_id)" class="btn btn-danger custom-width">Remove</button>
+                             	<button type="button" ng-click="ctrl.viewBlog(row.blog_id)" class="btn btn-success custom-width" data-toggle="modal" data-target="#blogModal">View Blog</button>
+                             
+                             
+                              <div ng-include="'resource/views/viewBlog.html'"></div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+       
+     
+  </body>
+</html>

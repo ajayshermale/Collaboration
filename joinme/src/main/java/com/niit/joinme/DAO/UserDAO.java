@@ -15,4 +15,6 @@ public interface UserDAO {
 	public void updateUser(DSUser user);
 	
 	public void deleteUser(int user_id);
+	
+	public DSUser loadUserByUsername(String userName);
 }

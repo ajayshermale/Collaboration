@@ -1,0 +1,89 @@
+<!-- Modal -->
+<div id="blogModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Blog Comments</h4>
+      </div>
+      <div class="modal-body" >
+        <p>{{ctrl.blogview.blog_id}}</p>
+         <td><img  src="resource/images/{{ctrl.blogview.blog_id}}.jpg" style="width:304px;height:228px;"> 
+        
+      <td>  <p>Blog Name:<h3>{{ctrl.blogview.title}}</h3></p></td>
+       <td> <p><span ng-bind-html="ctrl.blogview.content"></p></td>
+      </div>
+      
+      
+                            <div class="metadata-border">
+<!--                                         <span><i class="fa fa-eye"></i> 26</span> -->
+<!--                                         <a href="#"><i class="fa fa-comment"></i> 350</a> -->
+                       <div ng-controller="blog_like_controller as bloglikectrl">
+                                 <form ng-submit="bloglikectrl.submit()" name="blogLikeForm" class="form-horizontal">
+      	                        	<input type="hidden" ng-model="bloglikectrl.blogLike.blogLikeId" />             
+                                      	<i ng-click="bloglikectrl.submit()" class="fa fa-heart" aria-hidden="true"></i>   
+<!--                                  <a class="list-group-item" href="#">       <span><i class="fa fa-heart"></i> 50</span> -->
+
+                                        </form></div>
+                                        
+                                       
+<!--                                         <span class="kopa-rate"> -->
+<!--                                         <i class="fa fa-star"></i> -->
+<!--                                         <i class="fa fa-star"></i> -->
+<!--                                         <i class="fa fa-star"></i> -->
+<!--                                         <i class="fa fa-star"></i> -->
+<!--                                         <i class="fa fa-star-o"></i> -->
+                                        </span>
+                                    </div>
+      
+      
+      
+      <div ng-controller="blog_comment_controller as ctrl">
+      <form ng-submit="ctrl.submit()" name="blogCommentForm" class="form-horizontal">
+      		<input type="hidden" ng-model="ctrl.blogComment.commentId" />
+      		<div class="row">
+                          <div class="form-group col-md-12">
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.blogComment.blogComment" id="bname" class="username form-control input-sm" placeholder="Post comment" />
+                              </div>
+                          </div>
+                      </div>
+             <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="post" class="btn btn-primary btn-sm">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset</button>
+                          </div>
+                      </div>
+      </form>
+      <button type="button" ng-click="ctrl.fetchAllBlogComments()" class="btn btn-warning btn-sm" >view comments</button>
+      <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Comments</th>
+                             <th>   </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in ctrl.blogComments">
+                              <td><span ng-bind="row.blogComment"></span>
+                              <span ng-bind="row.commentDate"></span>
+                              </td>
+                              <td>
+                              <button type="button" ng-click="ctrl.remove(row.commentId)" class="btn btn-danger custom-width">Delete</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+      
+
+      <div class="modal-footer">
+        <button type="button" ng-click="ctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+	      </div>
+  </div>
+</div>

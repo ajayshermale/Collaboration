@@ -2,7 +2,7 @@
  
 app.factory('blog_service', ['$http', '$q', function($http, $q){
  
-    var REST_SERVICE_URI = 'http://localhost:8083/joinme/blog/';
+    var REST_SERVICE_URI = 'http://localhost:8081/joinme/blog/';
  
     var factory = {
         fetchAllBlogs: fetchAllBlogs,
@@ -46,31 +46,7 @@ app.factory('blog_service', ['$http', '$q', function($http, $q){
     }
  
     
-//    function uploadFileToUrl(file, uploadUrl){
-//    	 var fd = new FormData();
-//    	 fd.append('file', file);
-//    	 return $http.post(uploadUrl, fd, {
-//    	 transformRequest: angular.identity,
-//    	 headers: { 'Content-Type' : undefined}
-//    	 })
-//    	 .success(function(response){
-//
-//    	/* $scope.errors = response.data.value; */
-//    	 console.log(response);
-//    	 responseData = response;
-//    	 deffered.resolve(response);
-//    	 return deffered.promise;
-//    	 })
-//    	 .error(function(error){
-//    	 deffered.reject(error);
-//    	 return deffered.promise;
-//    	 });
-//
-//    	}
-//
-//    	this.getResponse = function() {
-//    	 return responseData;
-//    	 }
+
 
     
     

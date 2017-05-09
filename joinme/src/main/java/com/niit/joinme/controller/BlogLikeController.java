@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +20,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.joinme.model.BlogLike;
 import com.niit.joinme.service.BlogLikeService;
+import com.niit.joinme.service.UserService;
 
 @RestController
 public class BlogLikeController {
 
 	@Autowired
 	private BlogLikeService blogLikeService;
-	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value="/blogLike", method = RequestMethod.GET )
 	public ResponseEntity<List<BlogLike>> listAllLikesByBlogId(Integer blog_id,HttpSession session) {
@@ -42,9 +46,12 @@ public class BlogLikeController {
 	@RequestMapping(value= "/blogLike/", method = RequestMethod.POST)
 	public ResponseEntity<Void> addBlogLike(@RequestBody BlogLike blogLike, UriComponentsBuilder builder,HttpSession session,Integer blog_id)
 	{
-          
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = authentication.getName();
+	      int user_id = userService.loadUserByUsername(userName).getUserId();
+	      blogLike.setUser_id(user_id);      
 
-		blogLike.setUser_id(2);
+		//blogLike.setUser_id(2);
     System.out.println("user id is ...");
    
 	     blog_id=(Integer) session.getAttribute("blog_id");
@@ -68,7 +75,8 @@ public class BlogLikeController {
 
 	
 	@RequestMapping(value="/blogLike/{blogLikeId}", method = RequestMethod.DELETE )
-	public ResponseEntity<Void> deleteBlogComment(@PathVariable("blogLikeId") Integer blogLikeId) {
+	public ResponseEntity<Void> deleteBlogLike(@PathVariable("blogLikeId") Integer blogLikeId) {
+		System.out.println("blog like id .."+blogLikeId);
 		blogLikeService.deleteBlogLike(blogLikeId);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	

@@ -10,7 +10,7 @@ app.controller('blog_controller', ['$scope', 'blog_service','$http','$location',
     self.remove = remove;
     self.viewBlog = viewBlog;
     self.reset = reset;
-  // self.wysiwygeditor = wysiwygeditor;
+   self.submitBlogImage = submitBlogImage;
  
     fetchAllBlogs();
  
@@ -66,10 +66,31 @@ app.controller('blog_controller', ['$scope', 'blog_service','$http','$location',
             console.log('Blog updated with id ', self.blog.blog_id);
         }
         
-        var file = $scope.myFile;
-    	/* console.log('file is ' );
-    	console.dir(file);*/
-    	var uploadUrl = 'http://localhost:8083/joinme/blog/blogImage';
+//        var file = $scope.myFile;
+//    	/* console.log('file is ' );
+//    	console.dir(file);*/
+//    	var uploadUrl = 'http://localhost:8081/joinme/blog/blogImage';
+//    	var fd = new FormData();
+//    	fd.append('file', file);
+//    	$http.post(uploadUrl, fd, {
+//    	transformRequest : angular.identity,
+//    	headers : {
+//    	'Content-Type' : undefined
+//    	}
+//    	}).success(function() {
+//    	console.log('success');
+//    	}).error(function() {
+//    	console.log('error');
+//    	});
+        
+        reset();
+    }
+ 
+    function submitBlogImage(){
+      var file = $scope.blogImage;
+    	 console.log('file is ' );
+    	/*console.dir(file);*/
+    	var uploadUrl = 'http://localhost:8081/joinme/blog/blogImage';
     	var fd = new FormData();
     	fd.append('file', file);
     	$http.post(uploadUrl, fd, {
@@ -82,10 +103,7 @@ app.controller('blog_controller', ['$scope', 'blog_service','$http','$location',
     	}).error(function() {
     	console.log('error');
     	});
-        
-        reset();
-    }
- 
+     }
     
 //		$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
 //		$scope.htmlcontent = $scope.orightml;
@@ -131,7 +149,7 @@ app.controller('blog_controller', ['$scope', 'blog_service','$http','$location',
 
 
     function viewBlog(blog_id){
-    	$http.get('http://localhost:8083/joinme/blog/'+blog_id).then
+    	$http.get('http://localhost:8081/joinme/blog/'+blog_id).then
     	console.log('blog to view ', blog_id);
          for(var i = 0; i < self.blogs.length; i++){
              if(self.blogs[i].blog_id === blog_id) {

@@ -49,13 +49,31 @@ public class UserDAOImpl implements UserDAO
 		
 	}
 
-	 private static List<DSUser> UserList;
-	  public DSUser findByName(String userName) {
-	        for(DSUser user : UserList){
-	            if(user.getUsername().equalsIgnoreCase(userName)){
-	                return user;
-	            }
-	        }
-	        return null;
-	    }
+//	 private static List<DSUser> UserList;
+//	  public DSUser findByName(String userName) {
+//	        for(DSUser user : UserList){
+//	            if(user.getUsername().equalsIgnoreCase(userName)){
+//	                return user;
+//	            }
+//	        }
+//	        return null;
+//	    }
+	@SuppressWarnings("unchecked")
+	public DSUser loadUserByUsername(String userName) {
+		String hql = "from DSUser where userName='"+userName+"'";
+		List<DSUser> users = this.sessionFactory.getCurrentSession().createQuery(hql).getResultList();
+		if(users != null && !users.isEmpty())
+		{
+			return users.get(0);
+		}else{
+			return null;
+		}
+
+//		DSUser user = UserDAO.loadUserByUsername(userame);
+//        System.out.println(userInfo.getUserName() + "" + userInfo.getRole());
+//        GrantedAuthority authority = new SimpleGrantedAuthority(userInfo.getRole());
+//        UserDetails userDetails = (UserDetails)new User(userInfo.getUserName(), userInfo.getPassword(), Arrays.asList(authority));
+//        return userDetails;
+		
+	}
 }

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 @Entity
 public class DSUser {
 	@Id
@@ -19,9 +21,28 @@ public class DSUser {
 	private String password;
 	private String userFirstname;
 	private String userLastname;
-	private String userRole;
+	private int userRole;
 	private String createdBy;
 	private Date createdDate;
+	
+	private boolean enabled;
+	@Transient
+	private MultipartFile profileImage;
+
+
+
+	public MultipartFile getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(MultipartFile profileImage) {
+		this.profileImage = profileImage;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	@Transient
 	private MultipartFile userImage;
 	
@@ -73,12 +94,13 @@ public class DSUser {
 	public void setUserLastname(String userLastname) {
 		this.userLastname = userLastname;
 	}
-	public String getUserRole() {
+	public int getUserRole() {
 		return userRole;
 	}
-	public void setUserRole(String userRole) {
+	public void setUserRole(int userRole) {
 		this.userRole = userRole;
 	}
+
     
 
 }

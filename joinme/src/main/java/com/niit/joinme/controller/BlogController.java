@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +28,22 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.joinme.model.Blog;
 import com.niit.joinme.service.BlogService;
+import com.niit.joinme.service.UserService;
 
 @RestController
 public class BlogController {
 
 	@Autowired
 	private BlogService blogService;
+	@Autowired
+	private UserService userService;
+
 	
 	@RequestMapping(value="/blog/{blog_id}", method = RequestMethod.GET )
 	public ResponseEntity<Blog> getById(@PathVariable("blog_id") Integer blog_id,HttpSession session) {
 		session.setAttribute("blog_id", blog_id);
+		//int blogId=(Integer) session.getAttribute("blogId");
+
 	    System.out.println("set blog id..."+blog_id);
 		Blog blog = blogService.getById(blog_id);
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
@@ -54,6 +62,11 @@ public class BlogController {
 	
 	public ResponseEntity<Void> saveBlog(@RequestBody Blog blog,Integer blog_id,UriComponentsBuilder builder,HttpSession session)
 	{
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	      String userName = authentication.getName();
+	      int user_id = userService.loadUserByUsername(userName).getUserId();
+	      blog.setUser_id(user_id);
+         blog.setUserName(userName);
 		
 		 Date date=new Date();
 		 blog.setCreatedDate(date);
@@ -65,8 +78,9 @@ public class BlogController {
             
                HttpHeaders headers = new HttpHeaders();
                headers.setLocation(builder.path("/blog{blog_id}").buildAndExpand(blog.getBlog_id()).toUri());
-               session.setAttribute("blog_id",blog.getBlog_id());
-        		 System.out.println("blog id to set "+blog.getBlog_id());
+              
+//               session.setAttribute("blog_id",blog.getBlog_id());
+//        		 System.out.println("blog id to set "+blog.getBlog_id());
                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
               
 	}
@@ -76,7 +90,7 @@ public class BlogController {
 		public ResponseEntity<Void> addblogImage(@RequestParam(value="file")MultipartFile file,HttpSession session,UriComponentsBuilder builder,Blog blog){
 		
 			    
-      String path="C:\\Users\\Rahul\\workspace project2 new\\joinme_frontend\\src\\main\\webapp\\resource\\images\\";
+      String path="C:\\Users\\Rahul\\workspace project2 new one\\joinme_frontend\\src\\main\\webapp\\resource\\blogimg\\";
       int	blog_id=(Integer) session.getAttribute("blog_id");
 		path=path+blog_id+".jpg";
 		System.out.println("blog idd is"+blog_id);
@@ -105,7 +119,7 @@ public class BlogController {
 		{
 			System.out.println("File is Empty");
 		}
-	     		
+	     		session.removeAttribute("blog_id");
 	     		 HttpHeaders headers = new HttpHeaders();
 	             headers.setLocation(builder.path("/blog/{blog_id}").buildAndExpand(blog.getBlog_id()).toUri());
 	             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);	

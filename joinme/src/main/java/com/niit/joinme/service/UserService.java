@@ -41,7 +41,7 @@ public class UserService
 		userDAOImpl.updateUser(user);
 	}
 	
-	 public DSUser findByName(String userName) {
-       return userDAOImpl.findByName(userName);
+	 public DSUser loadUserByUsername(String userName) {
+       return userDAOImpl.loadUserByUsername(userName);
     }
 }

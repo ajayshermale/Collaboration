@@ -1,0 +1,167 @@
+
+<html>
+  <head>  
+    <title>AngularJS $http Example</title>  
+    <style>
+      .username.ng-valid {
+          background-color: lightgreen;
+      }
+      .username.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .username.ng-dirty.ng-invalid-minlength {
+          background-color: yellow;
+      }
+ 
+      .email.ng-valid {
+          background-color: lightgreen;
+      }
+      .email.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .email.ng-dirty.ng-invalid-email {
+          background-color: yellow;
+      }
+ 
+    </style>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+  </head>
+  <body ng-app="app" class="ng-cloak">
+<!--   <div class="container"> -->
+      <div class="generic-container" ng-controller="user_controller as ctrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">User Registration Form </span></div>
+              <div class="formcontainer">
+                  <form ng-submit="ctrl.submit()" name="userForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.user.user_id" />
+                      <br>
+<!--                       <div class="container"> -->
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="userName">Name</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.user.userName" id="userName" class="userName form-control input-sm" placeholder="Enter your name" required ng-minlength="3"/>
+<!--                                   <div class="has-error" ng-show="myForm.$dirty"> -->
+<!--                                       <span ng-show="myForm.uname.$error.required">This is a required field</span> -->
+<!--                                       <span ng-show="myForm.uname.$error.minlength">Minimum length required is 3</span> -->
+<!--                                       <span ng-show="myForm.uname.$invalid">This field is invalid </span> -->
+<!--                                   </div> -->
+                              </div>
+                          </div>
+                      </div>
+                         
+                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="password">password</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.user.password" id="password" class="password form-control input-sm" placeholder="Enter your password."/>
+                               <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.userFirstname.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.userFirstname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                          <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="userFirstname">userFirstname</label>
+                              <div class="col-md-7">
+                                  <input type="userFirstname" ng-model="ctrl.user.userFirstname" id=userFirstname class="userFirstname form-control input-sm" placeholder="Enter your userFirstname" required/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.userFirstname.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.userFirstname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+ 
+                    <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="userLastname">userLastname</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.user.userLastname" id="userLastname" class="form-control input-sm" placeholder="Enter your userLastname."/>
+                              </div>
+                          </div>
+                      </div>
+ 
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="createdBy">MailID</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.user.createdBy" id="createdBy" class="form-control input-sm" placeholder="Enter your MailID."/>
+                               <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="blogForm.content.$error.required">This is a required field</span>
+                                      <span ng-show="blogForm.content.$error.minlength">Minimum length required is 5</span>
+                                      <span ng-show="blogForm.content.$invalid">This field is invalid </span>
+                                  </div>
+                              
+                              </div>
+                          </div>
+                      </div>
+
+ 
+ 
+<!--  <div class="container"> -->
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!ctrl.user.user_id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
+                             
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="userForm.$setPristine">Reset Form</button>
+                          </div>
+                          <br>
+                      </div>
+                      </div>
+                
+                      
+                      
+                  </form>
+              </div>
+<!--           </div> -->
+          <div class="panel panel-default">
+                <!-- Default panel contents -->
+              <div class="panel-heading"><span class="lead">List of Users </span></div>
+              <div class="tablecontainer">
+<!--               <div class="container"> -->
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>Name</th>
+                              <th>password</th>
+                              <th>userFirstname</th>
+                               <th>userLastnamee</th>
+                                <th>createdBy</th>
+                                 <th>createdDate</th>
+                                 <th>Action</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in ctrl.users">
+                              <td><span ng-bind="row.user_id"></span></td>
+                              <td><span ng-bind="row.userName"></span></td>
+                              <td><span ng-bind="row.password"></span></td>
+                              <td><span ng-bind="row.userFirstname"></span></td>
+                              <td><span ng-bind="row.userLastname"></span></td>
+                              <td><span ng-bind="row.createdBy"></span></td>
+                              <td><span ng-bind="row.createdDate"></span></td>
+                              <td>
+                              <button type="button" ng-click="ctrl.edit(row.user_id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.user_id)" class="btn btn-danger custom-width">Remove</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              </div>
+          </div>
+      </div>
+       
+<!--       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script> -->
+<!--       <script src="<c:url value='/static/js/app.js' />"></script> -->
+<!--       <script src="<c:url value='/static/js/service/user_service.js' />"></script> -->
+<!--       <script src="<c:url value='/static/js/controller/user_controller.js' />"></script> -->
+      </div>
+  </body>
+</html>

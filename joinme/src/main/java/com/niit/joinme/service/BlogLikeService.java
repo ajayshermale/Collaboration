@@ -25,6 +25,7 @@ public class BlogLikeService {
 	}
 	
 	public void deleteBlogLike(int blogLikeId) {
+		System.out.println("blog like id..."+blogLikeId);
 		blogLikeDAO.deleteBlogLike(blogLikeId);
 	}
 

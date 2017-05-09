@@ -9,6 +9,6 @@ public interface BlogLikeDAO {
 
 	public boolean addBlogLike(BlogLike blogLike);
 	public List<BlogLike> listAllLikesByBlogId(int blog_id);
-	public void deleteBlogLike(int blog_id);
+	public void deleteBlogLike(int blogLikeId);
 
 }

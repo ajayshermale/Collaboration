@@ -1,5 +1,5 @@
 'use strict';
-var app=angular.module('app',['ngRoute','ngSanitize','textAngular']);
+var app=angular.module('app',['ngRoute','ngSanitize','textAngular','ngStorage','ngCookies']);
 
 
 
@@ -7,22 +7,38 @@ var app=angular.module('app',['ngRoute','ngSanitize','textAngular']);
 app.config(function($routeProvider){
 	$routeProvider
      .when('/', {
+    	//controller: 'login_controller',
     	 templateUrl: 'home.html',
         
      })
      
-    
+   
      .when('/blog', {
-    	controller: 'blog_controller',
+    	  controller: 'blog_controller',
     	  controller: 'blog_comment_controller',
     	  controller: 'blog_like_controller',
         templateUrl: 'resource/views/BlogManagement.html',
         
      })
-
-
      
-   
+//     .when('/login', {
+//    	controller: 'login_controller',
+//        templateUrl: 'resource/views/myProfile.html',
+//        
+//     })
+	  .when('/myProfile', {
+	    	 controller: 'login_controller',
+	    	 controller: 'blog_controller',
+	    	  controller: 'user_controller',
+	    	 templateUrl: 'resource/views/myProfile.html',
+	        
+	     })
+     
+    .when('/loginerror', {
+	    	
+	    	 templateUrl: 'resource/views/loginerror.html',
+	        
+	     })
 
      .when('/user', {
          

@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('user_controller', ['$scope', 'user_service', function($scope, user_service) {
+app.controller('user_controller', ['$scope', 'user_service','$http','$location', function($scope, user_service,$http,$location) {
     var self = this;
     self.user={user_id:null,userName:'',password:'',userFirstname:'',userLastname:'',createdBy:''};
     self.users=[];
@@ -9,7 +9,7 @@ app.controller('user_controller', ['$scope', 'user_service', function($scope, us
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
- 
+    self.submitUser = submitUser;
  
     fetchAllUsers();
  
@@ -84,6 +84,29 @@ app.controller('user_controller', ['$scope', 'user_service', function($scope, us
         deleteUser(user_id);
     }
  
+    
+
+    function submitUser(){
+ 	   var file = $scope.profileImage;
+ 	 
+ 	   var uploadUrl =  'http://localhost:8081/joinme/user/profileUpload';
+ 	   console.log('file is:',file);
+ 	   var fd = new FormData();
+ 	   fd.append('file', file);
+ 	   $http.post(uploadUrl, fd, {
+ 	   transformRequest : angular.identity,
+ 	   headers : {
+ 	   'Content-Type' : undefined
+ 	   }
+ 	   }).success(function() {
+ 	   console.log('success');
+ 	   }).error(function() {
+ 	   console.log('error');
+ 	   });
+    }
+
+    
+    
  
     function reset(){
         self.user={user_id:null,userName:'',password:'',userFirstname:'',userLastname:'',createdBy:''};

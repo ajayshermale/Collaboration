@@ -46,7 +46,7 @@ app.controller('blog_like_controller', ['$scope', 'blog_like_service','$location
     function deleteBlogLike(blogLikeId){
     	blog_like_service.deleteBlogLike(blogLikeId)
             .then(
-            self.fetchAllBlogComments,
+            self.fetchAllBlogLikes,
             function(errResponse){
                 console.error('Error while deleting like');
             }
@@ -61,12 +61,12 @@ app.controller('blog_like_controller', ['$scope', 'blog_like_service','$location
         reset();
     }
  
-    function remove(likeId){
+    function remove(blogLikeId){
         console.log('blogLikeId id to be deleted', blogLikeId);
         if(self.blogLike.blogLikeId === blogLikeId) {
             reset();
         }
-        deleteBlogComment(commentId);
+        deleteBlogLike(blogLikeId);
     }
  
  

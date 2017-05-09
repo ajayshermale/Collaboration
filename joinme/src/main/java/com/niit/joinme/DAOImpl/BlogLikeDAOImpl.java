@@ -31,6 +31,7 @@ public class BlogLikeDAOImpl {
 		// TODO Auto-generated method stub
 		BlogLike likeDelete = new BlogLike();
 		likeDelete.setBlogLikeId(blogLikeId);
+		System.out.println("daoimpl"+likeDelete);
 		this.sessionFactory.getCurrentSession().delete(likeDelete);
 	}
 

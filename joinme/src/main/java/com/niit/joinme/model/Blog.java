@@ -2,10 +2,13 @@ package com.niit.joinme.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -24,14 +27,41 @@ public class Blog {
 	
 	private Date createdDate;
 	
+	private int user_id;
+    
+	private String userName;
+
+
+
 	@Transient
 	private MultipartFile blogImage;
 	
+	
+	//@JsonBackReference
+	@ManyToOne(cascade=CascadeType.REMOVE)
+	@JoinColumn(name="user_id",nullable=false,insertable=false,updatable=false)
+
 
 	public MultipartFile getBlogImage() {
 		return blogImage;
 	}
 
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public void setBlogImage(MultipartFile blogImage) {
 		this.blogImage = blogImage;
 	}
