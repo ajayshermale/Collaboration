@@ -12,11 +12,15 @@
         <p>{{ctrl.blogview.blog_id}}</p>
          <td><img  src="resource/blogimg/{{ctrl.blogview.blog_id}}.jpg" style="width:304px;height:228px;"> 
          
-          <form name="blogForm" ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST">
-		<input type="file" file-model="blogImage"/>
+<!--           <form name="blogForm" ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST"> -->
+<!-- 		<input type="file" file-model="blogImage"/> -->
+<!-- 		<button type="submit" class="btn btn-lg btn-primary"ng-disabled="blogForm.$invalid">Save</button> -->
+<!--          </form> -->
+<div ng-controller="blog_controller as ctrl">
+        <form name="userForm" ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST">
+		<input type="file" file-model="profileImage"/>
 		<button type="submit" class="btn btn-lg btn-primary"ng-disabled="blogForm.$invalid">Save</button>
-         
-         
+		</form></div>
          
   
       <td>  <p>Blog Name:<h3>{{ctrl.blogview.title}}</h3></p></td>

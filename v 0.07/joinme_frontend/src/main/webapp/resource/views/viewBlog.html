@@ -1,0 +1,114 @@
+<!-- Modal -->
+<div id="blogModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Blog Comments</h4>
+      </div>
+      <div class="modal-body" >
+        <p>{{ctrl.blogview.blog_id}}</p>
+         <td><img  src="resource/blogimg/{{ctrl.blogview.blog_id}}.jpg" style="width:304px;height:228px;"> </td>
+         
+<!--           <form name="blogForm" ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST"> -->
+<!-- 		<input type="file" file-model="blogImage"/> -->
+<!-- 		<button type="submit" class="btn btn-lg btn-primary"ng-disabled="blogForm.$invalid">Save</button> -->
+<!--          </form> -->
+<div data-ng-controller="blog_controller as ctrl">
+        <form name="userForm" data-ng-submit="ctrl.submitBlogImage()" enctype="multipart/form-data" method="POST">
+		<input type="file" data-file-model="profileImage"/>
+		<button type="submit" class="btn btn-lg btn-primary" >Save</button>
+		</form></div>
+         
+  
+      <td>  <p>Blog Name:<h3>{{ctrl.blogview.title}}</h3></p></td>
+       <td><p><span data-ng-bind-html="ctrl.blogview.content"></span></p></td>
+      </div>
+      
+      
+               <div class="metadata-border">
+
+                   <div data-ng-controller="blog_like_controller as bloglikectrl">
+                                 <form data-ng-submit="bloglikectrl.submit()" name="blogLikeForm" class="form-horizontal">
+      	                        	<input type="hidden" data-ng-model="bloglikectrl.blogLike.blogLikeId" />             
+                                      <a class="btn btn-info btn-lg"><i data-ng-click="bloglikectrl.submit()" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"> Like</i></a> 
+
+                               </form>
+                           
+       <button type="button" data-ng-click="bloglikectrl.fetchAllBlogLikes()" class="btn btn-warning btn-sm" style="float:right;">view blogLikes</button>
+      <div class="tablecontainer">
+                  <table class="table table-hover">
+                     
+                      <tbody>
+                          <tr data-ng-repeat="row in bloglikectrl.blogLikes">
+                          <th>Liked by</th>
+                              <td>
+                              <span data-ng-bind="row.user.userName"></span>
+                            
+                              </td>
+                              <td>
+                              <button type="button" data-ng-click="bloglikectrl.remove(row.blogLikeId)" class="btn btn-danger custom-width">UnLike</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>    
+                               
+                               
+                     </div>   
+                </div>
+   
+      <hr>
+ 
+      <div data-ng-controller="blog_comment_controller as ctrl">
+      <form data-ng-submit="ctrl.submit()" name="blogCommentForm" class="form-horizontal">
+      		<input type="hidden" data-ng-model="ctrl.blogComment.commentId" />
+      		<div class="row">
+                          <div class="form-group col-md-12">
+                              <div class="col-md-7">
+                                  <input type="text" data-ng-model="ctrl.blogComment.blogComment" id="bname" class="username form-control input-sm" placeholder="Post comment" />
+                              </div>
+                          </div>
+                      </div>
+             <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="post" class="btn btn-primary btn-sm">
+                              <button type="button" data-ng-click="ctrl.reset()" class="btn btn-warning btn-sm" data-ng-disabled="blogForm.$pristine">Reset</button>
+                          </div>
+                      </div>
+      </form>
+      <button type="button" data-ng-click="ctrl.fetchAllBlogComments()" class="btn btn-warning btn-sm" >view comments</button>
+      <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Comments</th>
+                             <th>   </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr data-ng-repeat="row in ctrl.blogComments">
+                              <td><span data-ng-bind="row.blogComment"></span>
+                              <span data-ng-bind="row.commentDate"></span>
+                              </td>
+                              <td>
+                              <button type="button" data-ng-click="ctrl.remove(row.commentId)" class="btn btn-danger custom-width">Delete</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+      
+      
+      
+
+      <div class="modal-footer">
+<!--       ng-click="ctrl.refresh()" -->
+        <button type="button"  class="btn btn-default" data-dismiss="modal" data-href="http://localhost:8081/joinme_frontend/#/blog">Close</button>
+      </div>
+    </div>
+	      </div>
+  </div>
+</div>
